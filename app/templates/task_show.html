@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Task: {{ task.titile }}</h2>
+  <p>Author: {{ task.author }}, Assigned: {{ task.assigned }}</p>
+  <p>Priority: {{ task.priority }}, Status: {{ task.status }}</p>
+  <p>Text: {{ task.text }}</p>
+  <p> Tags:
+    {% for tag in task.tags %}
+      {{ tag }}
+    {% endfor %}
+  </p>
+{% endblock %}

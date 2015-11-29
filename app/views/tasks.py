@@ -15,6 +15,7 @@ from app.database import Task
 from app.utils import format_form_errors
 from app.utils import login_required
 from app.utils import update_task
+from app.utils import update_form
 from app.forms import EditTaskForm
 import datetime
 
@@ -32,7 +33,9 @@ def edit(id):
   possible_assigned = [elem.username for elem in list(User.view('users/by_username'))]
 
   form.assigned.choices = zip(possible_assigned, possible_assigned)
+  form.assigned.default = 0
   form.project.choices = [('test', 'test')]
+  form.assigned.default = 0
 
   if id == NEW_TASK_ID:
     # we should create new task
@@ -41,6 +44,7 @@ def edit(id):
     if not g.db.doc_exist(id):
       abort(404)
     task = Task.get(id)
+    form = update_form(task, form)
 
   if request.method == 'POST' and form.validate():
     task = update_task(task, form)
@@ -53,9 +57,12 @@ def edit(id):
     return redirect(url_for('index.index'))
 
   errors.extend(format_form_errors(form.errors.items()))
-  return render_template('edit_task.html', id = id, form = form, errors = errors)
+  return render_template('task_edit.html', id = id, form = form, errors = errors)
 
 @mod.route('/<id>')
 @login_required
 def show(id):
-  pass
+  if not g.db.doc_exist(id):
+    abort(404)
+  task = Task.get(id)
+  return render_template('task_show.html', task = task)

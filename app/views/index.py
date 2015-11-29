@@ -21,7 +21,13 @@ mod = Blueprint('index', __name__)
 
 @mod.route('/')
 def index():
-  return render_template('index.html')
+  assigned_task = []
+  author_tasks = []
+  if session['logged_in']:
+    username = session['username']
+    assigned_task = list(Task.view('tasks/by_assigned', key = username))
+    author_tasks = list(Task.view('tasks/by_author', key = username))
+  return render_template('index.html', assigned_tasks = assigned_task, author_tasks = author_tasks)
 
 @mod.route('/sign_up', methods = ['POST', 'GET'])
 def sign_up():

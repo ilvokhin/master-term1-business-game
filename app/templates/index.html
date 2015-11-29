@@ -6,5 +6,22 @@
     or <a href="{{ url_for('index.sign_up') }}">sign_up</a>
   {% else %}
     Hello, {{ session.username }}!
+    <ul class=assigned>
+      <h3>Assigned</h3>
+      {% for task in assigned_tasks: %}
+        <li> {{ task.title }}
+      {% else %}
+        <li><em>No tasks here</em>
+      {% endfor %}
+    </ul>
+
+    <ul class=author>
+      <h3>Author</h3>
+      {% for task in author_tasks: %}
+        <li> {{ task.title }}
+      {% else %}
+        <li><em>No tasks here</em>
+      {% endfor %}
+    </ul>
   {% endif %}
 {% endblock %}

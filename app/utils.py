@@ -38,12 +38,22 @@ def make_salt_passwd(passwd):
   password = make_passwd_hash(salt, passwd)
   return salt, password
 
+def update_form(task, form):
+  form.assigned.data = task.assigned
+  form.priority.data = task.priority
+  form.title.data = task.title
+  form.text.data = task.text
+  form.tags.data = ' '.join(task.tags)
+  form.status.data = task.status
+  form.project.data = task.project
+  return form
+
 def update_task(task, form):
-  assigned = form.assigned.data
-  priority = form.priority.data
-  title = form.title.data
-  text = form.text.data
-  tags = set(form.tags.data.split())
-  status = form.status.data
-  project = form.project.data
+  task.assigned = form.assigned.data
+  task.priority = form.priority.data
+  task.title = form.title.data
+  task.text = form.text.data
+  task.tags = set(form.tags.data.split())
+  task.status = form.status.data
+  task.project = form.project.data
   return task
