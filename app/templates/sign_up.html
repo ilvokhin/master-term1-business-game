@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Sign up</h2>
+  {% if error %}
+    <p class=error><strong>Error:</strong>{{ error }}
+  {% endif %}
+  <form action="{{ url_for('index.sign_up') }}" method=post>
+  <dl>
+    <dt>{{ form.username.label }}
+    <dd>{{ form.username(required=True) }}
+
+    <dt>{{ form.real_name.label }}
+    <dd>{{ form.real_name(required=True) }}
+
+    <dt>{{ form.password.label }}
+    <dd>{{ form.password(required=True) }}
+
+    <dt>{{ form.confirm.label }}
+    <dd>{{ form.confirm(required=True) }}
+
+    <dd><input type=submit value="Sign up">
+  </dl>
+  </form>
+{% endblock %}

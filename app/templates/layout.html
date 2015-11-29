@@ -1,0 +1,15 @@
+<!doctype html>
+
+<title>Simple task tracker</title>
+<div class=page>
+  <div class=metaenv>
+    {% if session.logged_in %}
+      <a href="{{ url_for('index.logout') }}">log out</a>
+    {% endif %}
+  </div>
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+  {% block body %}
+  {% endblock %}
+</div>

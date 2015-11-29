@@ -19,6 +19,7 @@ def init_db(db_name):
 
 class User(Document):
   username = StringProperty()
+  real_name = StringProperty()
   salt = StringProperty()
   password = StringProperty()
 
