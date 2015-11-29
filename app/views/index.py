@@ -8,10 +8,13 @@ from flask import g
 from flask import flash
 from flask import redirect
 from flask import url_for
+from flask import session
 from app.forms import SignUpForm
+from app.forms import LoginForm
 from app.database import User
 from app.database import Task
 from app.utils import make_salt_passwd
+from app.utils import make_passwd_hash
 from app.utils import format_form_errors
 
 mod = Blueprint('index', __name__)
@@ -40,6 +43,24 @@ def sign_up():
   errors.extend(format_form_errors(form.errors.items()))
   return render_template('sign_up.html', form = form, errors = errors)
 
-@mod.route('/login')
+@mod.route('/login', methods = ['POST', 'GET'])
 def login():
-  return 'Login'
+  errors = []
+  form = LoginForm(request.form)
+  if request.method == 'POST' and form.validate():
+    username = form.username.data
+    password = form.password.data
+    users = list(User.view('users/by_username', key = username))
+    if not users:
+      errors.append('Wrong username')
+    else:
+      user = users[0]
+      if make_passwd_hash(user.salt, password) != user.password:
+        errors.append('Wrong password')
+      else:
+        session['logged_in'] = True
+        session['uid'] = user._id
+        flash('You were logged in')
+        return redirect(url_for('index.index'))
+  errors.extend(format_form_errors(form.errors.items()))
+  return render_template('login.html', form = form, errors = errors)
