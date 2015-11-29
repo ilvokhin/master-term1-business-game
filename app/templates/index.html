@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Index</h2>
+  {% if not session.logged_in %}
+    You should <a href="{{ url_for('index.login') }}">log in</a>
+    or <a href="{{ url_for('index.sign_up') }}">sign_up</a>
+  {% else %}
+    Hello, {{ session.username }}!
+  {% endif %}
+{% endblock %}

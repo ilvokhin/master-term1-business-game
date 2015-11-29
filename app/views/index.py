@@ -21,7 +21,7 @@ mod = Blueprint('index', __name__)
 
 @mod.route('/')
 def index():
-  return 'It works!'
+  return render_template('index.html')
 
 @mod.route('/sign_up', methods = ['POST', 'GET'])
 def sign_up():
@@ -60,7 +60,17 @@ def login():
       else:
         session['logged_in'] = True
         session['uid'] = user._id
+        session['username'] = user.username
         flash('You were logged in')
         return redirect(url_for('index.index'))
   errors.extend(format_form_errors(form.errors.items()))
   return render_template('login.html', form = form, errors = errors)
+
+@mod.route('/logout')
+def logout():
+  session.pop('logged_in', None)
+  session.pop('uid', None)
+  session.pop('username', None)
+
+  flash('You were logged out')
+  return redirect(url_for('index.index'))
