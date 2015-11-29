@@ -1,10 +1,8 @@
 {% extends "layout.html" %}
 {% block body %}
   <h2>Sign up</h2>
-  {% for field, error in errors %}
-    {% for cur_error in error: %}
-      <p class=error>Error in field: <strong>{{ field }}</strong> — {{ cur_error }}
-    {% endfor %}
+  {% for error in errors %}
+    <p class=error>{{ error }}
   {% endfor %}
   <form action="{{ url_for('index.sign_up') }}" method=post>
   <dl>
