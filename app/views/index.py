@@ -23,7 +23,7 @@ mod = Blueprint('index', __name__)
 def index():
   assigned_task = []
   author_tasks = []
-  if session['logged_in']:
+  if session.get('logged_in', None):
     username = session['username']
     assigned_task = list(Task.view('tasks/by_assigned', key = username))
     author_tasks = list(Task.view('tasks/by_author', key = username))
