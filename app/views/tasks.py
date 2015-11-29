@@ -2,5 +2,60 @@
 # -*- coding: utf-8 -*
 
 from flask import Blueprint
+from flask import render_template
+from flask import request
+from flask import g
+from flask import flash
+from flask import redirect
+from flask import url_for
+from flask import session
+from flask import abort
+from app.database import User
+from app.database import Task
+from app.utils import format_form_errors
+from app.utils import login_required
+from app.utils import update_task
+from app.forms import EditTaskForm
+import datetime
+
+NEW_TASK_ID = u'new'
 
 mod = Blueprint('tasks', __name__, url_prefix = '/tasks')
+
+@mod.route('/edit/<id>', methods = ['GET', 'POST'])
+@login_required
+def edit(id):
+  errors = []
+  form = EditTaskForm(request.form)
+  task = None
+
+  possible_assigned = [elem.username for elem in list(User.view('users/by_username'))]
+
+  form.assigned.choices = zip(possible_assigned, possible_assigned)
+  form.project.choices = [('test', 'test')]
+
+  if id == NEW_TASK_ID:
+    # we should create new task
+    task = Task()
+  else:
+    if not g.db.doc_exist(id):
+      abort(404)
+    task = Task.get(id)
+
+  if request.method == 'POST' and form.validate():
+    task = update_task(task, form)
+    task.author = session['username']
+    task.update_date = datetime.datetime.utcnow()
+    if id == NEW_TASK_ID:
+      task.create_date = task.update_date
+    task.save()
+    flash('Task was successfully %s' % ('created' if id == NEW_TASK_ID else 'updated'))
+    return redirect(url_for('index.index'))
+
+  errors.extend(format_form_errors(form.errors.items()))
+  return render_template('edit_task.html', id = id, form = form, errors = errors)
+
+@mod.route('/<id>')
+@login_required
+def show(id):
+  pass

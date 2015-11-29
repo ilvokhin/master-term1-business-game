@@ -19,7 +19,7 @@ class SignUpForm(Form):
       validators.EqualTo('confirm', message = 'Passwords must match.')
     ]
   )
-  confirm = PasswordField('confirm password:')
+  confirm = PasswordField('confirm password')
 
 class LoginForm(Form):
   username = TextField('username', [validators.Required()])

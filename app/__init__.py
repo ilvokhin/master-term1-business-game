@@ -26,4 +26,3 @@ def before_request():
   User.set_db(g.db)
   Task.set_db(g.db)
   Comment.set_db(g.db)
-
