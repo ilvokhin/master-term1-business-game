@@ -9,14 +9,14 @@ from wtforms import TextAreaField
 from wtforms import validators
 
 class SignUpForm(Form):
-  username = TextField('username:', [validators.Length(min=4, max=50)])
-  real_name = TextField('real name:', [validators.Length(min=6)])
+  username = TextField('username', [validators.Length(min=4, max=50)])
+  real_name = TextField('real name', [validators.Length(min=6)])
   password = PasswordField \
   (
-    'password:',
+    'password',
     [
       validators.Required(),
-      validators.EqualTo('confirm', message = 'passwords must match')
+      validators.EqualTo('confirm', message = 'Passwords must match.')
     ]
   )
   confirm = PasswordField('confirm password:')

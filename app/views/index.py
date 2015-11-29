@@ -17,7 +17,8 @@ def sign_up():
   form = SignUpForm(request.form)
   if request.method == 'POST' and form.validate():
     pass
-  return render_template('sign_up.html', form = form)
+
+  return render_template('sign_up.html', form = form, errors = form.errors.items())
 
 @mod.route('/login')
 def login():
