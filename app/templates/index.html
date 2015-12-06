@@ -9,7 +9,7 @@
     <ul class=assigned>
       <h3>Assigned</h3>
       {% for task in assigned_tasks: %}
-        <li> {{ task.title }}
+        <li> <a href="{{ url_for('tasks.show', id = task._id) }}">{{ task.title }}</a>
       {% else %}
         <li><em>No tasks here</em>
       {% endfor %}
@@ -17,8 +17,8 @@
 
     <ul class=author>
       <h3>Author</h3>
-      {% for task in author_tasks: %}
-        <li> {{ task.title }}
+      {% for task in assigned_tasks: %}
+        <li> <a href="{{ url_for('tasks.show', id = task._id) }}">{{ task.title }}</a>
       {% else %}
         <li><em>No tasks here</em>
       {% endfor %}

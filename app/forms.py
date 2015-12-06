@@ -43,3 +43,6 @@ class EditTaskForm(Form):
   status = SelectField('status', choices = status_choices)
 
   project = SelectField('project')
+
+class CommentForm(Form):
+  text = TextAreaField('text', [validators.Length(min=2)])

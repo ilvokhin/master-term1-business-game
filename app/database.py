@@ -40,3 +40,4 @@ class Comment(Document):
   author = StringProperty()
   text = StringProperty()
   date = DateTimeProperty()
+  task_id = StringProperty()

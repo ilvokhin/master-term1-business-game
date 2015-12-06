@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h2>Task: {{ task.titile }}</h2>
+  <h2>Task {{ task.titile }} (<a href="{{ url_for('tasks.edit', id = task._id) }}">edit</a>):</h2>
   <p>Author: {{ task.author }}, Assigned: {{ task.assigned }}</p>
   <p>Priority: {{ task.priority }}, Status: {{ task.status }}</p>
   <p>Text: {{ task.text }}</p>
@@ -9,4 +9,17 @@
       {{ tag }}
     {% endfor %}
   </p>
+  <p>
+    Comments:
+    {% for comment in comments %}
+     <ul class=comment>
+      <li> <b>{{ comment.author }}:</b> {{ comment.text }}
+    </ul>
+    {% endfor %}
+  </p>
+  <form action="{{ url_for('tasks.show', id = task._id) }}" method=post>
+    <dt>{{ form.text.label }}
+    <dd>{{ form.text }}
+    <dd><input type=submit value="Add comment">
+  </form>
 {% endblock %}

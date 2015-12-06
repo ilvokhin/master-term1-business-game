@@ -12,11 +12,13 @@ from flask import session
 from flask import abort
 from app.database import User
 from app.database import Task
+from app.database import Comment
 from app.utils import format_form_errors
 from app.utils import login_required
 from app.utils import update_task
 from app.utils import update_form
 from app.forms import EditTaskForm
+from app.forms import CommentForm
 import datetime
 
 NEW_TASK_ID = u'new'
@@ -59,10 +61,28 @@ def edit(id):
   errors.extend(format_form_errors(form.errors.items()))
   return render_template('task_edit.html', id = id, form = form, errors = errors)
 
-@mod.route('/<id>')
+@mod.route('/<id>', methods = ['GET', 'POST'])
 @login_required
 def show(id):
   if not g.db.doc_exist(id):
     abort(404)
+
+  errors = []
   task = Task.get(id)
-  return render_template('task_show.html', task = task)
+  form = CommentForm(request.form)
+  comments = list(Comment.view('comments/by_task_id', key = id))
+  comments = sorted(comments, key = lambda x: x.date)
+
+  if request.method == 'POST' and form.validate():
+    new_comment = Comment()
+    new_comment.author = session['username']
+    new_comment.text = form.text.data
+    new_comment.date = datetime.datetime.utcnow()
+    new_comment.task_id = id
+    new_comment.save()
+    flash('Comment was successfully added')
+    return redirect(url_for('tasks.show', id = id))
+
+  errors.extend(format_form_errors(form.errors.items()))
+  return render_template('task_show.html', \
+    task = task, comments = comments, form = form, errors = errors)
