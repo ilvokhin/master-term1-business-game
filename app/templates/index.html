@@ -2,26 +2,33 @@
 {% block body %}
   <h2>Index</h2>
   {% if not session.logged_in %}
-    You should <a href="{{ url_for('index.login') }}">log in</a>
-    or <a href="{{ url_for('index.sign_up') }}">sign_up</a>
+    <a href="{{ url_for('index.login') }}">Log in</a> 
+	or <a href="{{ url_for('index.sign_up') }}">sign up</a> to access this page.
   {% else %}
-    Hello, {{ session.username }}!
-    <ul class=assigned>
-      <h3>Assigned</h3>
-      {% for task in assigned_tasks: %}
-        <li> <a href="{{ url_for('tasks.show', id = task._id) }}">{{ task.title }}</a>
-      {% else %}
-        <li><em>No tasks here</em>
-      {% endfor %}
-    </ul>
+    Hello, {{ session.username }}
 
-    <ul class=author>
-      <h3>Author</h3>
-      {% for task in assigned_tasks: %}
-        <li> <a href="{{ url_for('tasks.show', id = task._id) }}">{{ task.title }}</a>
-      {% else %}
-        <li><em>No tasks here</em>
-      {% endfor %}
+		<h3>Tasks you are assigned to:</h3>
+		<ul class="tl">
+		{% for task in assigned_tasks: %}
+			<li class="tl-item">
+				<a href="{{ url_for('tasks.show', id = task._id) }}">{{ task.title }}</a><br>
+				<font size="-1">Due date: ...</font>
+			</li>
+    {% else %}
+			<li><em>None</em></li>
+    {% endfor %}
+		</ul>
+
+		<h3>Tasks you created:</h3>
+    <ul class="tl">
+    {% for task in assigned_tasks: %}
+			<li class="tl-item">
+				<a href="{{ url_for('tasks.show', id = task._id) }}">{{ task.title }}</a><br>
+				<font size="-1">Due date: ...</font>
+			</li>
+		{% else %}
+      <li><em>None</em></li>
+    {% endfor %}
     </ul>
   {% endif %}
 {% endblock %}

@@ -3,8 +3,8 @@ body {
 }
 
 .page {
-	margin-left: 10%;
-	margin-right: 10%;
+	margin-left: 5%;
+	margin-right: 5%;
 }
 
 .navbox {
@@ -37,3 +37,19 @@ body {
 	color :#fff;
 	text-decoration: none;
 }
+
+.tl {
+	width: 50%;
+	display: table;
+	table-layout: fixed;
+}
+
+.tl-item {
+	width: 100%;
+	list-style: none;
+	padding: 7px;
+	word-wrap: break-word;
+	background-color: #f7f7ff;
+	border: 1px solid #f0f0ff;
+}
+
