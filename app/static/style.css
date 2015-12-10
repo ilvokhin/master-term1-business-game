@@ -7,17 +7,30 @@ body {
 	margin-right: 10%;
 }
 
-.nav {
+.navbox {
 	background-color: #34495e;
-	border: 0px;
 	border-bottom: 1px solid #34495e;
+}
+
+.topbox {
+	border: 0px;
 	color: #fff;
 
 	border-radius: 0 !important;
 	display: block;
 	padding-top: 15px;
 	padding-left: 20px;
-	min-height: 40px;
+	min-height: 35px;
+}
+
+.errbox {
+	background-color: #a03449;
+	border-bottom: 1px solid #a03449;
+}
+
+.infobox {
+	background-color: #689c9f;
+	border-bottom: 1px solid #689c9c;
 }
 
 .wh {

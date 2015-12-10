@@ -5,7 +5,7 @@
 		<title>Simple task tracker</title>
 	</head>
 	<body>
-		<div class="nav">
+		<div class="topbox navbox">
 			<a href="{{ url_for('index.index') }}" class="wh">Front page</a>
 		{% if session.logged_in %}
 			| <a href="{{ url_for('index.logout') }}" class="wh">Logout</a>
@@ -14,19 +14,20 @@
 			| <a href="{{ url_for('index.sign_up') }}" class="wh">Sign up</a>
 		{% endif %}
 		</div>
+		
+		{% for message in get_flashed_messages() %}
+		<div class="topbox infobox">{{ message }}</div>
+		{% endfor %}	
+
+		{% if errors %}
+		{% for error in errors %}
+				<div class="topbox errbox"><b>Error:</b> {{ error }}</div>
+		{% endfor %}
+		{% endif %}
 
 		<div class="page">
-		{% for message in get_flashed_messages() %}
-			<div class="flash">{{ message }}</div>
-		{% endfor %}
-		
-		{% if errors %}
-			{% for error in errors %}
-				<p class="error">{{ error }}
-			{% endfor %}
-		{% endif %}
-		{% block body %}
-		{% endblock %}
+			{% block body %}
+			{% endblock %}
 		</div>
 	</body>
 </html>
