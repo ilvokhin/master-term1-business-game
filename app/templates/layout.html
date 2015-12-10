@@ -1,20 +1,32 @@
 <!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+		<title>Simple task tracker</title>
+	</head>
+	<body>
+		<div class="nav">
+			<a href="{{ url_for('index.index') }}" class="wh">Front page</a>
+		{% if session.logged_in %}
+			| <a href="{{ url_for('index.logout') }}" class="wh">Logout</a>
+		{% else %}
+			| <a href="{{ url_for('index.login') }}" class="wh">Login</a>
+			| <a href="{{ url_for('index.sign_up') }}" class="wh">Sign up</a>
+		{% endif %}
+		</div>
 
-<title>Simple task tracker</title>
-<div class=page>
-  <div class=metaenv>
-    {% if session.logged_in %}
-      <a href="{{ url_for('index.logout') }}">log out</a>
-    {% endif %}
-  </div>
-  {% for message in get_flashed_messages() %}
-    <div class=flash>{{ message }}</div>
-  {% endfor %}
-  {% if errors %}
-    {% for error in errors %}
-      <p class=error>{{ error }}
-    {% endfor %}
-  {% endif %}
-  {% block body %}
-  {% endblock %}
-</div>
+		<div class="page">
+		{% for message in get_flashed_messages() %}
+			<div class="flash">{{ message }}</div>
+		{% endfor %}
+		
+		{% if errors %}
+			{% for error in errors %}
+				<p class="error">{{ error }}
+			{% endfor %}
+		{% endif %}
+		{% block body %}
+		{% endblock %}
+		</div>
+	</body>
+</html>

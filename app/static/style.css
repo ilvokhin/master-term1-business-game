@@ -1,0 +1,26 @@
+body {
+	font-family: Helvetica;
+}
+
+.page {
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.nav {
+	background-color: #34495e;
+	border: 0px;
+	border-bottom: 1px solid #34495e;
+	color: #fff;
+
+	border-radius: 0 !important;
+	display: block;
+	padding-top: 15px;
+	padding-left: 20px;
+	min-height: 40px;
+}
+
+.wh {
+	color :#fff;
+	text-decoration: none;
+}
