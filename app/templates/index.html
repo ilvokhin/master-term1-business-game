@@ -21,7 +21,7 @@
 
 		<h3>Tasks you created (<a href="{{ url_for('tasks.edit', id = 'new') }}">add new</a>):</h3>
     <ul class="tl">
-    {% for task in assigned_tasks: %}
+    {% for task in author_tasks: %}
 			<li class="tl-item">
 				<a href="{{ url_for('tasks.show', id = task._id) }}">{{ task.title }}</a><br>
 				<font size="-1">Due date: ...</font>
