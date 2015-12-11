@@ -2,20 +2,15 @@
 {% block body %}
   <h2>Sign up</h2>
   <form action="{{ url_for('index.sign_up') }}" method=post>
-  <dl>
-    <dt>{{ form.username.label }}
-    <dd>{{ form.username(required=True) }}
-
-    <dt>{{ form.real_name.label }}
-    <dd>{{ form.real_name(required=True) }}
-
-    <dt>{{ form.password.label }}
-    <dd>{{ form.password(required=True) }}
-
-    <dt>{{ form.confirm.label }}
-    <dd>{{ form.confirm(required=True) }}
-
-    <dd><input type=submit value="Sign up">
+    <dd>{{ form.username(required=True, placeholder=form.username.label.text,
+      class="textfield") }}
+    <dd>{{ form.real_name(required=True, placeholder=form.real_name.label.text,
+      class="textfield") }}
+    <dd>{{ form.password(required=True, placeholder=form.password.label.text,
+      class="textfield") }}
+    <dd>{{ form.confirm(required=True, placeholder=form.confirm.label.text,
+      class="textfield") }}
+    <dd><input type=submit value="Sign up" class="button">
   </dl>
   </form>
 {% endblock %}
