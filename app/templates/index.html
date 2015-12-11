@@ -2,7 +2,7 @@
 {% block body %}
   <h2>Index</h2>
   {% if not session.logged_in %}
-    <a href="{{ url_for('index.login') }}">Log in</a> 
+    <a href="{{ url_for('index.login') }}">Log in</a>
 	or <a href="{{ url_for('index.sign_up') }}">sign up</a> to access this page.
   {% else %}
     Hello, {{ session.username }}
@@ -19,7 +19,7 @@
     {% endfor %}
 		</ul>
 
-		<h3>Tasks you created:</h3>
+		<h3>Tasks you created (<a href="{{ url_for('tasks.edit', id = 'new') }}">add new</a>):</h3>
     <ul class="tl">
     {% for task in assigned_tasks: %}
 			<li class="tl-item">
