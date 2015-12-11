@@ -2,14 +2,10 @@
 {% block body %}
   <h2>Login</h2>
   <form action="{{ url_for('index.login') }}" method=post>
-  <dl>
-    <dt>{{ form.username.label }}
-    <dd>{{ form.username(required=True) }}
-
-    <dt>{{ form.password.label }}
-    <dd>{{ form.password(required=True) }}
-
-    <dd><input type=submit value="Login">
-  </dl>
+    <dd>{{ form.username(required=True, placeholder=form.username.label.text,
+      class="textfield") }}
+    <dd>{{ form.password(required=True, placeholder=form.password.label.text,
+      class="textfield") }}
+    <dd><input type=submit value="Login" class="button">
   </form>
 {% endblock %}
