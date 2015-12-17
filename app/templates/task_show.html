@@ -1,16 +1,25 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h2>Task {{ task.titile }} (<a href="{{ url_for('tasks.edit', id = task._id) }}">edit</a>):</h2>
-  <p>Author: {{ task.author }}, Assigned: {{ task.assigned }}</p>
-  <p>Priority: {{ task.priority }}, Status: {{ task.status }}</p>
-  <p>Text: {{ task.text }}</p>
-  <p> Tags:
+  <h2>{{ task.title }} (<a href="{{ url_for('tasks.edit', id = task._id) }}">edit</a>):</h2>
+  <p><b>Author:</b> {{ task.author }}, <b>assigned to:</b> {{ task.assigned }}</p>
+  <p><b>Priority:</b> {{ task.priority }}, <b>status:</b> {{ task.status }}</p>
+  <p><b>Description:</b> {{ task.text }}</p>
+  <p><b>Tags</b>:
     {% for tag in task.tags %}
       {{ tag }}
     {% endfor %}
   </p>
+  {% if files %}
+  <p><b>Attached files:</b>
+  <ul>
+  {% for f in files %}
+    <li><a href="{{ url_for('index.uploaded_file', id = task._id, name = f) }}">{{ f }}</a>
+  {% endfor %}
+  </ul>
+  {% endif %}
+  <hr>
   <p>
-    Comments:
+    <h4>Comments</h4>
     {% for comment in comments %}
      <ul class=comment>
       <li> <b>{{ comment.author }}:</b> {{ comment.text }}
@@ -18,8 +27,7 @@
     {% endfor %}
   </p>
   <form action="{{ url_for('tasks.show', id = task._id) }}" method=post>
-    <dt>{{ form.text.label }}
-    <dd>{{ form.text }}
-    <dd><input type=submit value="Add comment">
+    <dd>{{ form.text(class="textfield", style="width: 350px; height: 70px;") }}
+    <dd><input type=submit value="Add comment" class="button">
   </form>
 {% endblock %}

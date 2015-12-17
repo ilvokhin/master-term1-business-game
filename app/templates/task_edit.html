@@ -1,30 +1,33 @@
 {% extends "layout.html" %}
 {% block body %}
   <h2>Task edit</h2>
-  <form action="{{ url_for('tasks.edit', id = id) }}" method=post>
-  <dl>
-    <dt>{{ form.assigned.label }}
-    <dd>{{ form.assigned }}
+  <form action="{{ url_for('tasks.edit', id = id) }}" method=post enctype=multipart/form-data>
+    <dt class="descr">{{ form.assigned.label }}:
+    <dt>{{ form.assigned(class="textfield") }}
 
-    <dt>{{ form.priority.label }}
-    <dd>{{ form.priority }}
+    <dt class="descr">{{ form.priority.label }}:
+    <dt>{{ form.priority(class="textfield") }}
 
-    <dt>{{ form.title.label }}
-    <dd>{{ form.title }}
+    <dt class="descr">{{ form.title.label }}:
+    <dt>{{ form.title(class="textfield", style="width: 400px;") }}
 
-    <dt>{{ form.text.label }}
-    <dd>{{ form.text }}
+    <dt class="descr">{{ form.text.label }}:
+    <dt>{{ form.text(class="textfield", style="width: 400px; height: 150px;") }}
 
-    <dt>{{ form.tags.label }}
-    <dd>{{ form.tags }}
+    <dt class="descr">{{ form.tags.label }}:
+    <dt>{{ form.tags(class="textfield") }}
 
-    <dt>{{ form.status.label }}
-    <dd>{{ form.status }}
+    <dt class="descr">{{ form.status.label }}:
+    <dt>{{ form.status(class="textfield") }}
 
-    <dt>{{ form.project.label }}
-    <dd>{{ form.project }}
-
-    <dd><input type=submit value="Submit">
+    <dt class="descr">{{ form.project.label }}:
+    <dt>{{ form.project(class="textfield") }}
+	
+	<dt>Add up to 3 files:
+	{% for i in range(3) %}
+	<dt><input type=file style="margin-bottom:4px;" name=file{{ i }}>
+	{% endfor %}
+    <dt><input type=submit value="Submit" style="margin-top:15px;" class="button">
   </dl>
   </form>
 {% endblock %}

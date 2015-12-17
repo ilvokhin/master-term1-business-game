@@ -10,6 +10,7 @@ from flask import redirect
 from flask import url_for
 from flask import session
 from flask import abort
+from app import app
 from app.database import User
 from app.database import Task
 from app.database import Comment
@@ -19,10 +20,13 @@ from app.utils import update_task
 from app.utils import update_form
 from app.forms import EditTaskForm
 from app.forms import CommentForm
+from werkzeug import secure_filename
 import datetime
+import os
+import random
 
 NEW_TASK_ID = u'new'
-
+UPLOADED_FILES = os.path.join(app.root_path, app.config.get('UPLOAD_FOLDER'))
 mod = Blueprint('tasks', __name__, url_prefix = '/tasks')
 
 @mod.route('/edit/<id>', methods = ['GET', 'POST'])
@@ -54,6 +58,22 @@ def edit(id):
     task.update_date = datetime.datetime.utcnow()
     if id == NEW_TASK_ID:
       task.create_date = task.update_date
+	
+    if id != NEW_TASK_ID:
+      for ff in request.files.keys():
+        f = request.files[ff]
+        if f:
+          fname = secure_filename(f.filename)
+          fld = os.path.join(UPLOADED_FILES, id)
+          if not os.path.exists(fld):
+            os.mkdir(fld)
+          target_path = os.path.join(fld, fname)
+          while os.path.exists(target_path):
+            filename, ext = os.path.splitext(target_path)
+            r = ''.join(random.choice('0123456789abcdef') for i in range(8))
+            target_path = os.path.join(fld, filename + '-' + r + ext)
+          f.save(target_path)
+          flash('Successfully uploaded %s' % fname)
     task.save()
     flash('Task was successfully %s' % ('created' if id == NEW_TASK_ID else 'updated'))
     return redirect(url_for('index.index'))
@@ -82,7 +102,14 @@ def show(id):
     new_comment.save()
     flash('Comment was successfully added')
     return redirect(url_for('tasks.show', id = id))
+  
+  fpath = os.path.join(UPLOADED_FILES, id)
+  files = None
+  if os.path.exists(fpath):
+    files = os.listdir(fpath)
 
   errors.extend(format_form_errors(form.errors.items()))
   return render_template('task_show.html', \
-    task = task, comments = comments, form = form, errors = errors)
+    task = task, comments = comments, form = form, errors = errors, \
+    files = files)
+

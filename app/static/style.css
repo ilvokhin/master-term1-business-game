@@ -55,7 +55,7 @@ body {
 
 .textfield {
 	padding: 5px;
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 }
 
 .button {
@@ -73,4 +73,8 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.descr {
+	margin-bottom: 5px;
 }

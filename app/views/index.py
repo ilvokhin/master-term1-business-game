@@ -9,6 +9,8 @@ from flask import flash
 from flask import redirect
 from flask import url_for
 from flask import session
+from flask import send_from_directory
+from app import app
 from app.forms import SignUpForm
 from app.forms import LoginForm
 from app.database import User
@@ -16,6 +18,7 @@ from app.database import Task
 from app.utils import make_salt_passwd
 from app.utils import make_passwd_hash
 from app.utils import format_form_errors
+import os
 
 mod = Blueprint('index', __name__)
 
@@ -80,3 +83,7 @@ def logout():
 
   flash('You were logged out')
   return redirect(url_for('index.index'))
+
+@mod.route('/uploads/<id>/<name>')
+def uploaded_file(id, name):
+  return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], id), name)
