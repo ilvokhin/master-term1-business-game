@@ -10,42 +10,42 @@ from wtforms import DateField
 from wtforms import validators
 
 class SignUpForm(Form):
-  username = TextField('username', [validators.Length(min=4, max=50)])
-  real_name = TextField('real name', [validators.Length(min=6)])
+  username = TextField('Username', [validators.Length(min=4, max=50)])
+  real_name = TextField('Real name', [validators.Length(min=6)])
   password = PasswordField \
   (
-    'password',
+    'Password',
     [
       validators.Required(),
       validators.EqualTo('confirm', message = 'Passwords must match.')
     ]
   )
-  confirm = PasswordField('confirm password')
+  confirm = PasswordField('Retype password')
 
 class LoginForm(Form):
-  username = TextField('username', [validators.Required()])
-  password = PasswordField('password', [validators.Required()])
+  username = TextField('Username', [validators.Required()])
+  password = PasswordField('Password', [validators.Required()])
 
 class EditTaskForm(Form):
-  assigned = SelectField('assigned')
+  assigned = SelectField('Assigned to')
 
   priority_choices = []
-  for elem in ['hight', 'normal', 'low']:
+  for elem in ['High', 'Normal', 'Low']:
     priority_choices.append((elem, elem))
-  priority = SelectField('priority', choices = priority_choices)
+  priority = SelectField('Priority', choices = priority_choices)
 
-  title = TextField('title', [validators.Length(min=6)])
-  text = TextAreaField('text')
-  tags = TextField('tags')
+  title = TextField('Title', [validators.Length(min=6)])
+  text = TextAreaField('Description')
+  tags = TextField('Tags')
 
   status_choices = []
-  for elem in ['new', 'work', 'ready', 'close']:
+  for elem in ['New', 'Work in progress', 'Done', 'Closed']:
     status_choices.append((elem, elem))
-  status = SelectField('status', choices = status_choices)
+  status = SelectField('Status', choices = status_choices)
 
-  project = SelectField('project')
+  project = SelectField('Project')
 
-  due_date = DateField('due date', format = '%d.%m.%Y')
+  due_date = DateField('Due date', format = '%d.%m.%Y')
 
 class CommentForm(Form):
-  text = TextAreaField('text', [validators.Length(min=2)])
+  text = TextAreaField('Text', [validators.Length(min=2)])

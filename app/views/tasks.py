@@ -58,7 +58,7 @@ def edit(id):
     task.update_date = datetime.datetime.utcnow()
     if id == NEW_TASK_ID:
       task.create_date = task.update_date
-	
+
     if id != NEW_TASK_ID:
       for ff in request.files.keys():
         f = request.files[ff]
@@ -102,7 +102,7 @@ def show(id):
     new_comment.save()
     flash('Comment was successfully added')
     return redirect(url_for('tasks.show', id = id))
-  
+
   fpath = os.path.join(UPLOADED_FILES, id)
   files = None
   if os.path.exists(fpath):
@@ -112,4 +112,3 @@ def show(id):
   return render_template('task_show.html', \
     task = task, comments = comments, form = form, errors = errors, \
     files = files)
-

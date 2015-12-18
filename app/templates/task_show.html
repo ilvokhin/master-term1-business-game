@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
 {% block body %}
   <h2>{{ task.title }} (<a href="{{ url_for('tasks.edit', id = task._id) }}">edit</a>):</h2>
-  <p><b>Author:</b> {{ task.author }}, <b>assigned to:</b> {{ task.assigned }}</p>
-  <p><b>Priority:</b> {{ task.priority }}, <b>status:</b> {{ task.status }}</p>
+  <p><b>Author:</b> {{ task.author }}</p>
+  <p><b>Assigned to:</b> {{ task.assigned }}</p>
+  <p><b>Priority:</b> {{ task.priority }}</p>
+  <p><b>Status:</b> {{ task.status }}</p>
   <p><b>Description:</b> {{ task.text }}</p>
   <p><b>Due date:</b> {{ task.due_date.strftime('%d.%m.%Y') }}</p>
   <p><b>Tags</b>:
