@@ -11,8 +11,11 @@
 		<ul class="tl">
 		{% for task in assigned_tasks: %}
 			<li class="tl-item">
-				<a href="{{ url_for('tasks.show', id = task._id) }}">{{ task.title }}</a><br>
-				<font size="-1">Due date: ...</font>
+				<a href="{{ url_for('tasks.show', id = task._id) }}"><b>{{ task.title }}</b></a><br>
+        <ul style="font-size:90%;">
+          <li>Created by: {{ task.author }}
+          <li>Due date: {{ task.due_date.strftime('%d.%m.%Y') }}
+        </ul>
 			</li>
     {% else %}
 			<li><em>None</em></li>
@@ -23,8 +26,12 @@
     <ul class="tl">
     {% for task in author_tasks: %}
 			<li class="tl-item">
-				<a href="{{ url_for('tasks.show', id = task._id) }}">{{ task.title }}</a><br>
-				<font size="-1">Due date: ...</font>
+				<a href="{{ url_for('tasks.show', id = task._id) }}"><b>{{ task.title }}</b></a><br>
+        <ul style="font-size:90%;">
+          <li>Created by: {{ task.author }}
+          <li>Assigned to: {{ task.assigned }}
+          <li>Due date: {{ task.due_date.strftime('%d.%m.%Y') }}
+        </ul>
 			</li>
 		{% else %}
       <li><em>None</em></li>
