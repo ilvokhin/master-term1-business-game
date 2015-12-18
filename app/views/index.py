@@ -15,6 +15,7 @@ from app.forms import SignUpForm
 from app.forms import LoginForm
 from app.database import User
 from app.database import Task
+from app.database import Project
 from app.utils import make_salt_passwd
 from app.utils import make_passwd_hash
 from app.utils import format_form_errors
@@ -26,11 +27,14 @@ mod = Blueprint('index', __name__)
 def index():
   assigned_task = []
   author_tasks = []
+  author_projects = []
   if session.get('logged_in', None):
     username = session['username']
     assigned_task = list(Task.view('tasks/by_assigned', key = username))
     author_tasks = list(Task.view('tasks/by_author', key = username))
-  return render_template('index.html', assigned_tasks = assigned_task, author_tasks = author_tasks)
+    author_projects = list(Project.view('projects/by_author', key = username))
+  return render_template('index.html', assigned_tasks = assigned_task, \
+    author_tasks = author_tasks, author_projects = author_projects)
 
 @mod.route('/sign_up', methods = ['POST', 'GET'])
 def sign_up():

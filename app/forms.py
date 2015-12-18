@@ -56,5 +56,12 @@ class EditTaskForm(Form):
 
   due_date = DateField('Due date', format = '%d.%m.%Y')
 
+class EditProjectForm(Form):
+  author = TextField('Author')
+  title = TextField('Title')
+  start_date = DateField('Start date', format = '%d.%m.%Y')
+  due_date = DateField('Due date', format = '%d.%m.%Y')
+  text = TextAreaField('Description')
+
 class CommentForm(Form):
   text = TextAreaField('Text', [validators.Length(min=2)])

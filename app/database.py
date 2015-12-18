@@ -25,6 +25,13 @@ class User(Document):
   password = StringProperty()
   email = StringProperty()
 
+class Project(Document):
+  author = StringProperty()
+  title = StringProperty()
+  start_date = DateProperty()
+  due_date = DateProperty()
+  text = StringProperty()
+
 class Task(Document):
   author = StringProperty()
   assigned = StringProperty()
@@ -33,7 +40,7 @@ class Task(Document):
   text = StringProperty()
   tags = SetProperty()
   status = StringProperty()
-  project = StringProperty()
+  project_id = StringProperty()
   comments = SetProperty()
   create_date = DateTimeProperty()
   update_date = DateTimeProperty()

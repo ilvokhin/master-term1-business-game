@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>{{ project.title }} (<a href="{{ url_for('projects.edit', id = project._id) }}">edit</a>):</h2>
+  <p><b>Author:</b> {{ project.author }}</p>
+  <p><b>Description:</b> {{ project.text }}</p>
+  <p><b>Start date:</b> {{ project.start_date.strftime('%d.%m.%Y') }}</p>
+  <p><b>Due date:</b> {{ project.due_date.strftime('%d.%m.%Y') }}</p>
+
+  {% if files %}
+  <p><b>Attached files:</b>
+  <ul>
+  {% for f in files %}
+    <li><a href="{{ url_for('index.uploaded_file', id = task._id, name = f) }}">{{ f }}</a>
+  {% endfor %}
+  </ul>
+  {% endif %}
+  <hr>
+
+{% endblock %}

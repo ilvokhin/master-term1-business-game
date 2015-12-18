@@ -37,5 +37,21 @@
       <li><em>None</em></li>
     {% endfor %}
     </ul>
+
+    <h3>Projects you created (<a href="{{ url_for('projects.edit', id = 'new') }}">add new</a>):</h3>
+    <ul class="tl">
+    {% for project in author_projects: %}
+     <li class="tl-item">
+       <a href="{{ url_for('projects.show', id = project._id) }}"><b>{{ project.title }}</b></a><br>
+       <ul style="font-size:90%">
+         <li>Start date: {{ project.start_date.strftime('%d.%m.%Y') }}
+         <li>Due date: {{ project.due_date.strftime('%d.%m.%Y') }}
+        </ul>
+      </li>
+    {% else %}
+      <li><em>None</em></li>
+    {% endfor %}
+  </ul>
+
   {% endif %}
 {% endblock %}
