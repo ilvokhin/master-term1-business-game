@@ -4,6 +4,7 @@
   <p><b>Author:</b> {{ task.author }}, <b>assigned to:</b> {{ task.assigned }}</p>
   <p><b>Priority:</b> {{ task.priority }}, <b>status:</b> {{ task.status }}</p>
   <p><b>Description:</b> {{ task.text }}</p>
+  <p><b>Due date:</b> {{ task.due_date.strftime('%d.%m.%Y') }}</p>
   <p><b>Tags</b>:
     {% for tag in task.tags %}
       {{ tag }}

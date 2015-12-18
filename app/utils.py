@@ -43,6 +43,7 @@ def update_form(task, form):
   form.tags.data = ' '.join(task.tags)
   form.status.data = task.status
   form.project.data = task.project
+  form.due_date.data = task.due_date
   return form
 
 def update_task(task, form):
@@ -53,4 +54,5 @@ def update_task(task, form):
   task.tags = set(form.tags.data.split())
   task.status = form.status.data
   task.project = form.project.data
+  task.due_date = form.due_date.data
   return task

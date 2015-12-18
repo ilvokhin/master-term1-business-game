@@ -6,6 +6,7 @@ from wtforms import TextField
 from wtforms import PasswordField
 from wtforms import SelectField
 from wtforms import TextAreaField
+from wtforms import DateField
 from wtforms import validators
 
 class SignUpForm(Form):
@@ -43,6 +44,8 @@ class EditTaskForm(Form):
   status = SelectField('status', choices = status_choices)
 
   project = SelectField('project')
+
+  due_date = DateField('due date', format = '%d.%m.%Y')
 
 class CommentForm(Form):
   text = TextAreaField('text', [validators.Length(min=2)])

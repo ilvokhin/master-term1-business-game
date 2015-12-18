@@ -6,6 +6,7 @@ from couchdbkit import Server
 from couchdbkit import Document
 from couchdbkit import StringProperty
 from couchdbkit import SetProperty
+from couchdbkit import DateProperty
 from couchdbkit import DateTimeProperty
 
 def connect_db(db_name):
@@ -35,6 +36,7 @@ class Task(Document):
   comments = SetProperty()
   create_date = DateTimeProperty()
   update_date = DateTimeProperty()
+  due_date = DateProperty()
 
 class Comment(Document):
   author = StringProperty()

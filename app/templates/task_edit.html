@@ -23,6 +23,9 @@
     <dt class="descr">{{ form.project.label }}:
     <dt>{{ form.project(class="textfield") }}
 
+    <dt class="descr">{{ form.due_date.label }}:
+    <dt>{{ form.due_date(class="textfield") }}
+
     {% if id != 'new' %}
   	<dt>Add up to 3 files:
   	{% for i in range(3) %}
