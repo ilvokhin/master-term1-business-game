@@ -50,7 +50,8 @@ def edit(id):
     if not g.db.doc_exist(id):
       abort(404)
     task = Task.get(id)
-    form = update_form(task, form)
+    if request.method == 'GET':
+      form = update_form(task, form)
 
   if request.method == 'POST' and form.validate():
     task = update_task(task, form)
