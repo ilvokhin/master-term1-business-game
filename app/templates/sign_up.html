@@ -8,7 +8,11 @@
       class="textfield") }}
     <dd>{{ form.password(required=True, placeholder=form.password.label.text,
       class="textfield") }}
-    <dd>{{ form.confirm(required=True, placeholder=form.confirm.label.text,
+    <dd>{{ form.confirm_password(required=True, placeholder=form.confirm_password.label.text,
+      class="textfield") }}
+    <dd>{{ form.email(required=True, placeholder=form.email.label.text,
+      class="textfield") }}
+    <dd>{{ form.confirm_email(required=True, placeholder=form.confirm_email.label.text,
       class="textfield") }}
     <dd><input type=submit value="Sign up" class="button">
   </dl>

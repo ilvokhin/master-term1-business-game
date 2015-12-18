@@ -17,10 +17,19 @@ class SignUpForm(Form):
     'Password',
     [
       validators.Required(),
-      validators.EqualTo('confirm', message = 'Passwords must match.')
+      validators.EqualTo('confirm_password', message = 'Passwords must match.')
     ]
   )
-  confirm = PasswordField('Retype password')
+  confirm_password = PasswordField('Retype password')
+  email = TextField \
+  (
+    'E-mail address',
+    [
+      validators.Required(),
+      validators.EqualTo('confirm_email', message = 'E-mails must match.')
+    ]
+  )
+  confirm_email = TextField('Retype e-mail')
 
 class LoginForm(Form):
   username = TextField('Username', [validators.Required()])

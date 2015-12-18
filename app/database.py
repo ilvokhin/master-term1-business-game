@@ -23,6 +23,7 @@ class User(Document):
   real_name = StringProperty()
   salt = StringProperty()
   password = StringProperty()
+  email = StringProperty()
 
 class Task(Document):
   author = StringProperty()
