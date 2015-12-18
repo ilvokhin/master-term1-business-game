@@ -22,11 +22,13 @@
 
     <dt class="descr">{{ form.project.label }}:
     <dt>{{ form.project(class="textfield") }}
-	
-	<dt>Add up to 3 files:
-	{% for i in range(3) %}
-	<dt><input type=file style="margin-bottom:4px;" name=file{{ i }}>
-	{% endfor %}
+
+    {% if id != 'new' %}
+  	<dt>Add up to 3 files:
+  	{% for i in range(3) %}
+  	<dt><input type=file style="margin-bottom:4px;" name=file{{ i }}>
+  	{% endfor %}
+    {% endif %}
     <dt><input type=submit value="Submit" style="margin-top:15px;" class="button">
   </dl>
   </form>
