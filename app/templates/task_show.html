@@ -23,9 +23,9 @@
   {% endif %}
   <hr>
   <p>
-    <h4>Comments</h4>
+    <h4>Comments:</h4>
     {% for comment in comments %}
-     <ul class=comment>
+     <ul class=comment-item>
       <li> <b>{{ comment.author }}:</b> {{ comment.text }}
     </ul>
     {% endfor %}

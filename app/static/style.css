@@ -53,6 +53,17 @@ body {
 	border: 1px solid #f0f0ff;
 }
 
+.comment-item {
+  width: 100%;
+  list-style: none;
+  padding : 7px;
+  word-wrap: break-word;
+  background-color: #fffff0;
+  border: 1px solid #f0f0ff;
+  margin-bottom: 15px;
+  border-radius: 15px;
+}
+
 .textfield {
 	padding: 5px;
 	margin-bottom: 15px;
