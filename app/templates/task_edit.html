@@ -2,29 +2,29 @@
 {% block body %}
   <h2>Task edit</h2>
   <form action="{{ url_for('tasks.edit', id = id) }}" method=post enctype=multipart/form-data>
-    <dt class="descr">{{ form.assigned.label }}:
-    <dt>{{ form.assigned(class="textfield") }}
-
-    <dt class="descr">{{ form.priority.label }}:
-    <dt>{{ form.priority(class="textfield") }}
-
     <dt class="descr">{{ form.title.label }}:
     <dt>{{ form.title(class="textfield", style="width: 400px;") }}
 
-    <dt class="descr">{{ form.text.label }}:
-    <dt>{{ form.text(class="textfield", style="width: 400px; height: 150px;") }}
-
-    <dt class="descr">{{ form.tags.label }}:
-    <dt>{{ form.tags(class="textfield") }}
-
-    <dt class="descr">{{ form.status.label }}:
-    <dt>{{ form.status(class="textfield") }}
+    <dt class="descr">{{ form.assigned.label }}:
+    <dt>{{ form.assigned(class="textfield") }}
 
     <dt class="descr">{{ form.project.label }}:
     <dt>{{ form.project(class="textfield") }}
 
+    <dt class="descr">{{ form.priority.label }}:
+    <dt>{{ form.priority(class="textfield") }}
+
+    <dt class="descr">{{ form.status.label }}:
+    <dt>{{ form.status(class="textfield") }}
+
+    <dt class="descr">{{ form.text.label }}:
+    <dt>{{ form.text(class="textfield", style="width: 400px; height: 150px;") }}
+
     <dt class="descr">{{ form.due_date.label }}:
     <dt>{{ form.due_date(class="textfield") }}
+
+    <dt class="descr">{{ form.tags.label }}:
+    <dt>{{ form.tags(class="textfield") }}
 
     {% if id != 'new' %}
   	<dt>Add up to 3 files:

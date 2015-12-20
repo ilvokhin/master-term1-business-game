@@ -3,6 +3,7 @@
   <h2>{{ task.title }} (<a href="{{ url_for('tasks.edit', id = task._id) }}">edit</a>):</h2>
   <p><b>Author:</b> {{ task.author }}</p>
   <p><b>Assigned to:</b> {{ task.assigned }}</p>
+  <p><b>Project:</b> {{ task.project }}</p>
   <p><b>Priority:</b> {{ task.priority }}</p>
   <p><b>Status:</b> {{ task.status }}</p>
   <p><b>Description:</b> {{ task.text }}</p>

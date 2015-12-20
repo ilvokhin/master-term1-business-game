@@ -4,7 +4,9 @@
 from app import app
 
 def main():
-  app.run(host = app.config.get('HOST'), debug = app.config.get('DEBUG'))
+  app.run(host = app.config.get('HOST'), \
+    debug = app.config.get('DEBUG'), \
+    port = app.config.get('PORT'))
 
 if __name__ == "__main__":
   main()
