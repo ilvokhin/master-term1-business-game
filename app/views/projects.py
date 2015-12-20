@@ -17,8 +17,6 @@ from app.database import Comment
 from app.database import Project
 from app.utils import format_form_errors
 from app.utils import login_required
-from app.utils import update_task
-from app.utils import update_form
 from app.forms import EditTaskForm
 from app.forms import EditProjectForm
 from app.forms import CommentForm

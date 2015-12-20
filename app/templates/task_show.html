@@ -7,10 +7,10 @@
   <p><b>Status:</b> {{ task.status }}</p>
   <p><b>Description:</b> {{ task.text }}</p>
   <p><b>Due date:</b> {{ task.due_date.strftime('%d.%m.%Y') }}</p>
-  <p><b>Tags</b>:
-    {% for tag in task.tags %}
+  <p><b>Tags</b>: {{ task.tags }}
+    {#% for tag in task.tags %}
       {{ tag }}
-    {% endfor %}
+    {% endfor %#}
   </p>
   {% if files %}
   <p><b>Attached files:</b>

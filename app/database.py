@@ -38,7 +38,7 @@ class Task(Document):
   priority = StringProperty()
   title = StringProperty()
   text = StringProperty()
-  tags = SetProperty()
+  tags = StringProperty()
   status = StringProperty()
   project_id = StringProperty()
   comments = SetProperty()

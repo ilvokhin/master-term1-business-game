@@ -16,8 +16,6 @@ from app.database import Task
 from app.database import Comment
 from app.utils import format_form_errors
 from app.utils import login_required
-from app.utils import update_task
-from app.utils import update_form
 from app.forms import EditTaskForm
 from app.forms import CommentForm
 from werkzeug import secure_filename
@@ -37,26 +35,27 @@ def edit(id):
   task = None
 
   possible_assigned = [elem.username for elem in list(User.view('users/by_username'))]
-
-  form.assigned.choices = zip(possible_assigned, possible_assigned)
-  form.assigned.default = 0
-  form.project.choices = [('test', 'test')]
-  form.assigned.default = 0
-
+ 
   if id == NEW_TASK_ID:
-    # we should create new task
     task = Task()
   else:
     if not g.db.doc_exist(id):
       abort(404)
     task = Task.get(id)
     if request.method == 'GET':
-      form = update_form(task, form)
+      form = EditTaskForm(obj=task)
+  
+  form.assigned.choices = zip(possible_assigned, possible_assigned)
+  form.assigned.default = 0
+  form.project.choices = [('test', 'test')]
+  form.project.default = 0
 
   if request.method == 'POST' and form.validate():
-    task = update_task(task, form)
+    form.populate_obj(task)
     task.author = session['username']
     task.update_date = datetime.datetime.utcnow()
+    task.tags = ' '.join(set(task.tags.split()))
+    
     if id == NEW_TASK_ID:
       task.create_date = task.update_date
 
