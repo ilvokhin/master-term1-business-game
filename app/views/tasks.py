@@ -25,6 +25,7 @@ import os
 import random
 
 NEW_TASK_ID = u'new'
+PROJECT_ROUTE = '/projects'
 UPLOADED_FILES = os.path.join(app.root_path, app.config.get('UPLOAD_FOLDER'))
 mod = Blueprint('tasks', __name__, url_prefix = '/tasks')
 
@@ -48,9 +49,15 @@ def edit(id):
       form = EditTaskForm(obj=task)
   
   form.assigned.choices = zip(possible_assigned, possible_assigned)
-  form.assigned.default = 0
   form.project.choices = zip(possible_project, possible_project)
-  form.project.default = 0
+  # dirty hack here: we use referrer to determine from which
+  # project we came from and set correct value to select field
+  print request.referrer
+  if PROJECT_ROUTE in request.referrer:
+    project_id = request.referrer.split('/')[-1]
+    project = Project.get(project_id)
+    form.project.default = project.title
+    form.process()
 
   if request.method == 'POST' and form.validate():
     form.populate_obj(task)
