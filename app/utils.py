@@ -11,6 +11,8 @@ from flask import session
 from app.database import Task
 from app.forms import EditTaskForm
 
+from collections import defaultdict
+
 def login_required(f):
   @functools.wraps(f)
   def wrapped(*args, **kwargs):
@@ -35,3 +37,8 @@ def make_salt_passwd(passwd):
   password = make_passwd_hash(salt, passwd)
   return salt, password
 
+def split_by_priority(tasks):
+  d = defaultdict(list)
+  for task in sorted(tasks, key = lambda x: x.due_date, reverse = True):
+    d[task.priority].append(task)
+  return d

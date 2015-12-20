@@ -15,5 +15,15 @@
   </ul>
   {% endif %}
   <hr>
+  <ul class="tl">
+  {% for priority in tasks %}
+    <h3>Current {{ priority.lower() }}-priority tasks for this project:</h3>
+    {% for task in tasks[priority]: %}
+      {% include "task_single.html" %}
+    {% else %}
+      <li><em>None</em></li>
+    {% endfor %}
+  {% endfor %}
+  </ul>
 
 {% endblock %}

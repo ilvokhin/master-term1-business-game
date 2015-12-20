@@ -14,6 +14,7 @@ from app import app
 from app.database import User
 from app.database import Task
 from app.database import Comment
+from app.database import Project
 from app.utils import format_form_errors
 from app.utils import login_required
 from app.forms import EditTaskForm
@@ -35,6 +36,7 @@ def edit(id):
   task = None
 
   possible_assigned = [elem.username for elem in list(User.view('users/by_username'))]
+  possible_project = [elem.title for elem in list (Project.view('projects/by_title'))]
  
   if id == NEW_TASK_ID:
     task = Task()
@@ -47,7 +49,7 @@ def edit(id):
   
   form.assigned.choices = zip(possible_assigned, possible_assigned)
   form.assigned.default = 0
-  form.project.choices = [('test', 'test')]
+  form.project.choices = zip(possible_project, possible_project)
   form.project.default = 0
 
   if request.method == 'POST' and form.validate():

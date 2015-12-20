@@ -17,6 +17,7 @@ from app.database import Comment
 from app.database import Project
 from app.utils import format_form_errors
 from app.utils import login_required
+from app.utils import split_by_priority
 from app.forms import EditTaskForm
 from app.forms import EditProjectForm
 from app.forms import CommentForm
@@ -82,6 +83,7 @@ def show(id):
 
   errors = []
   project = Project.get(id)
+  tasks = list(Task.view('tasks/by_project', key = project.title))
 
   '''
   fpath = os.path.join(UPLOADED_FILES, id)
@@ -91,4 +93,4 @@ def show(id):
   '''
 
   return render_template('project_show.html', \
-    project = project, errors = errors)
+    project = project, tasks = split_by_priority(tasks), errors = errors)

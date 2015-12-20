@@ -10,13 +10,7 @@
 		<h3>Tasks you are assigned to:</h3>
 		<ul class="tl">
 		{% for task in assigned_tasks: %}
-			<li class="tl-item">
-				<a href="{{ url_for('tasks.show', id = task._id) }}"><b>{{ task.title }}</b></a><br>
-        <ul style="font-size:90%;">
-          <li>Created by: {{ task.author }}
-          <li>Due date: {{ task.due_date.strftime('%d.%m.%Y') }}
-        </ul>
-			</li>
+      {% include "task_single.html" %}
     {% else %}
 			<li><em>None</em></li>
     {% endfor %}
@@ -25,14 +19,7 @@
 		<h3>Tasks you created (<a href="{{ url_for('tasks.edit', id = 'new') }}">add new</a>):</h3>
     <ul class="tl">
     {% for task in author_tasks: %}
-			<li class="tl-item">
-				<a href="{{ url_for('tasks.show', id = task._id) }}"><b>{{ task.title }}</b></a><br>
-        <ul style="font-size:90%;">
-          <li>Created by: {{ task.author }}
-          <li>Assigned to: {{ task.assigned }}
-          <li>Due date: {{ task.due_date.strftime('%d.%m.%Y') }}
-        </ul>
-			</li>
+      {% include "task_single.html" %}
 		{% else %}
       <li><em>None</em></li>
     {% endfor %}
