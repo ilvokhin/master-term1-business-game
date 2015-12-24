@@ -68,24 +68,25 @@ def edit(id):
     if id == NEW_TASK_ID:
       task.create_date = task.update_date
 
-    if id != NEW_TASK_ID:
-      for ff in request.files.keys():
-        f = request.files[ff]
-        if f:
-          fname = secure_filename(f.filename)
-          fld = os.path.join(UPLOADED_FILES, id)
-          if not os.path.exists(fld):
-            os.mkdir(fld)
-          target_path = os.path.join(fld, fname)
-          while os.path.exists(target_path):
-            filename, ext = os.path.splitext(target_path)
-            r = ''.join(random.choice('0123456789abcdef') for i in range(8))
-            target_path = os.path.join(fld, filename + '-' + r + ext)
-          f.save(target_path)
-          flash('Successfully uploaded %s' % fname)
     task.save()
+    for ff in request.files.keys():
+      f = request.files[ff]
+      if f:
+        fname = secure_filename(f.filename)
+        fld = os.path.join(UPLOADED_FILES, task._id)
+        if not os.path.exists(fld):
+          os.mkdir(fld)
+
+        target_path = os.path.join(fld, fname)
+        while os.path.exists(target_path):
+          filename, ext = os.path.splitext(target_path)
+          r = ''.join(random.choice('0123456789abcdef') for i in range(8))
+          target_path = os.path.join(fld, filename + '-' + r + ext)
+        f.save(target_path)
+        flash('Successfully uploaded %s' % fname)
+
     flash('Task was successfully %s' % ('created' if id == NEW_TASK_ID else 'updated'))
-    return redirect(url_for('index.index'))
+    return redirect(url_for('tasks.show', id=task._id))
 
   errors.extend(format_form_errors(form.errors.items()))
   return render_template('task_edit.html', id = id, form = form, errors = errors)
