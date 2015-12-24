@@ -1,8 +1,10 @@
-<li class="tl-item">
-  <a href="{{ url_for('tasks.show', id = task._id) }}"><b>{{ task.title }}</b></a><br>
-  <ul style="font-size:90%;">
-    <li>Created by: {{ task.author }}
-    <li>Assigned to: {{ task.assigned }}
-    <li>Due date: {{ task.due_date.strftime('%d.%m.%Y') }}
-  </ul>
-</li>
+{% macro render_task(task, priority) %}
+  <li class="tl-item tl-item-{{ priority }}">
+    <a href="{{ url_for('tasks.show', id = task._id) }}"><b>{{ task.title }}</b></a><br>
+	<ul style="font-size:90%;">
+	  <li>Created by: {{ task.author }}
+	  <li>Assigned to: {{ task.assigned }}
+	  <li>Due date: {{ task.due_date.strftime('%d.%m.%Y') }}
+    </ul>
+  </li>
+{% endmacro %}

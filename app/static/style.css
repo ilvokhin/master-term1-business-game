@@ -49,8 +49,27 @@ body {
 	list-style: none;
 	padding: 7px;
 	word-wrap: break-word;
+	border: 1px solid;
+}
+
+.tl-item-default {
 	background-color: #f7f7ff;
-	border: 1px solid #f0f0ff;
+	border-color: #f0f0ff;
+}
+
+.tl-item-low {
+	background-color: #cfc;
+	border-color: #ced;
+}
+
+.tl-item-normal {
+	background-color: #ffff80;
+	border-color: #ffff33;
+}
+
+.tl-item-high {
+	background-color: #ffb3b3;
+	border-color: #fcc;
 }
 
 .comment-item {

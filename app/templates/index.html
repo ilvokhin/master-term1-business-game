@@ -1,4 +1,6 @@
 {% extends "layout.html" %}
+{% from 'task_single.html' import render_task %}
+
 {% block body %}
   <h2>Index</h2>
   {% if not session.logged_in %}
@@ -7,19 +9,19 @@
   {% else %}
     Hello, {{ session.username }}
 
-		<h3>Tasks you are assigned to:</h3>
-		<ul class="tl">
-		{% for task in assigned_tasks: %}
-      {% include "task_single.html" %}
+    <h3>Tasks you are assigned to:</h3>
+	<ul class="tl">
+	{% for task in assigned_tasks: %}
+      {{ render_task(task, task.priority.lower()) }}
     {% else %}
-			<li><em>None</em></li>
+      <li><em>None</em></li>
     {% endfor %}
-		</ul>
+	</ul>
 
-		<h3>Tasks you created (<a href="{{ url_for('tasks.edit', id = 'new') }}">add new</a>):</h3>
+	<h3>Tasks you created (<a href="{{ url_for('tasks.edit', id = 'new') }}">add new</a>):</h3>
     <ul class="tl">
     {% for task in author_tasks: %}
-      {% include "task_single.html" %}
+      {{ render_task(task, task.priority.lower()) }}
 		{% else %}
       <li><em>None</em></li>
     {% endfor %}
@@ -28,7 +30,7 @@
     <h3>Projects you created (<a href="{{ url_for('projects.edit', id = 'new') }}">add new</a>):</h3>
     <ul class="tl">
     {% for project in author_projects: %}
-     <li class="tl-item">
+     <li class="tl-item tl-item-default">
        <a href="{{ url_for('projects.show', id = project._id) }}"><b>{{ project.title }}</b></a><br>
        <ul style="font-size:90%">
          <li>Start date: {{ project.start_date.strftime('%d.%m.%Y') }}

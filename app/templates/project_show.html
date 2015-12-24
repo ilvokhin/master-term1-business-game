@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% from 'task_single.html' import render_task %}
 {% block body %}
   <h2>{{ project.title }} (<a href="{{ url_for('projects.edit', id = project._id) }}">edit</a>):</h2>
   <p><b>Author:</b> {{ project.author }}</p>
@@ -20,7 +21,7 @@
   {% for priority in tasks %}
     <h3>Current {{ priority.lower() }}-priority tasks for this project:</h3>
     {% for task in tasks[priority]: %}
-      {% include "task_single.html" %}
+      {{ render_task(task, priority.lower()) }}
     {% else %}
       <li><em>None</em></li>
     {% endfor %}
