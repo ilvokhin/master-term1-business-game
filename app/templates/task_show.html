@@ -15,7 +15,7 @@
   </p>
   {% if files %}
   <p><b>Attached files:</b>
-  <ul>
+  <ul class="paperclip">
   {% for f in files %}
     <li><a href="{{ url_for('index.uploaded_file', id = task._id, name = f) }}">{{ f }}</a>
   {% endfor %}

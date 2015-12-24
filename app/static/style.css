@@ -108,3 +108,7 @@ body {
 .descr {
 	margin-bottom: 5px;
 }
+
+ul.paperclip {
+  list-style-image: url('/static/images/paperclip.gif');
+}
