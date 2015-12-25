@@ -26,7 +26,7 @@
     <h4>Comments:</h4>
     {% for comment in comments %}
      <ul class=comment-item>
-      <li> <b>{{ comment.author }}:</b> {{ comment.text }}
+      <li> <b>{{ comment.author }}:</b> {{ comment.text | safe }}
     </ul>
     {% endfor %}
   </p>
