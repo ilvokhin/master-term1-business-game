@@ -58,17 +58,17 @@ body {
 }
 
 .tl-item-low {
-	background-color: #cfc;
+	background-color: #dfd;
 	border-color: #ced;
 }
 
 .tl-item-normal {
-	background-color: #ffff80;
-	border-color: #ffff33;
+	background-color: #ffd;
+	border-color: #dda;
 }
 
 .tl-item-high {
-	background-color: #ffb3b3;
+	background-color: #fdd;
 	border-color: #fcc;
 }
 
