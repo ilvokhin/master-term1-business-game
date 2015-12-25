@@ -1,0 +1,113 @@
+\documentclass[a4paper, 14pt]{extarticle}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{amssymb, latexsym, amsmath}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{citehack}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{pdfpages}
+
+\lstloadlanguages{HTML,python}
+\lstset{extendedchars=false,
+  breaklines=true,
+  breakatwhitespace=true,
+  keepspaces = true,
+  tabsize=2
+}
+
+
+\begin{document}
+\include{./title}
+\newpage
+
+
+\tableofcontents
+\newpage
+
+
+\section{Аннотация}
+При компании <<Скородумов и Партнеры>> был сформирован отдел проектирования программного обеспечения, специализирующийся на создании интернет-решений для малого и среднего бизнеса, образовательных учреждений, госпредприятий, задачей которого стала разработка офиса управления проектами, позиционирующегося как SaaS-приложение (Software as a Service, или <<ПО как услуга>>).
+
+Результатом работы над проектом стало появление на свет проектного офиса <<Цифромед>>, представленного в виде веб-приложения, реализованного на языке Python с применением многофункционального фреймворка Flask.
+
+Одной из целей проекта также являлось обеспечение компании <<Скородумов и Партнеры>> решением для управления проектами, предназначенным для внутреннего пользования и при этом, несмотря на имеющиеся аналоги (teamtools.ru, <<Мегаплан>> и др.), не уступающим им по основным показателям производительности и функциональности.
+
+
+В данный отчёт входят:
+
+\begin{itemize}
+\setlength{\itemsep}{-1mm}
+\item Иерархическая модель работ (WBS, Work Breakdown Structure) и бизнес-модель проекта;
+\item IDEF0-модель цикла разработки данного проекта;
+\item Техническое задание;
+\item Структура базы данных приложения;
+\item Программная логика серверной части (backend);
+\item Описание интерфейсной части (frontend);
+\item Паспорт проекта и его данные.
+\end{itemize}
+
+\newpage
+
+
+\section{Анализ проекта}
+  \subsection{Цель проекта}
+    \subsubsection{Достижимость цели}
+    % Упомянуть о том, что <<мы не про>>
+		
+  \subsection{Продукт проекта}
+  % Описать проектный офис. Взять универсальное описание откуда-л.
+  
+  \subsection{Work Breakdown Structure}
+  % Описание, схема
+  
+  \subsection{Бизнес-модель проекта}
+  % Описание, модель
+  
+  \subsection{IDEF0}
+  % Описание, диаграмма
+  
+  \subsection{DFD}
+  % Описание, диаграмма
+
+\newpage
+
+
+\section{Техническое задание}
+% Краткая аннотация, а затем -- задание из репозитория (с небольшими переработками)
+
+\newpage
+
+
+\section{Структура приложения}
+  \subsection{Схема}
+  % Описание, <<как пришли>> и схема
+  
+  \subsection{Бизнес-логика}
+  % Много из http://habrahabr.ru/post/65432/
+  
+\newpage
+
+
+\section{Серверная часть} % исправить заголовок?
+
+\newpage
+
+
+\section{Клиентская часть} % исправить заголовок?
+
+\newpage
+
+
+\section{Выводы}
+% Ещё немного про то, что мы, безусловно, не конкуренты кому-либо, но наш проект можно использовать и вообще!
+
+\newpage
+
+
+\section{Паспорт проекта}
+% Сырые PDF, экспортированные из MS Word; я не хочу перевёрстывать их в TeX
+
+\end{document}
