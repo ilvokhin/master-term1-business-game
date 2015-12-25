@@ -1237,8 +1237,9 @@ article.smaller q:before, article.smaller q:after {
 
 /* line 826, ../scss/default.scss */
 .thank-you-slide {
-  background: #4387fd !important;
-  color: white;
+  /*background: #4387fd !important;*/
+  background: #ffffff !important;
+  color: black;
 }
 /* line 830, ../scss/default.scss */
 .thank-you-slide h2 {
