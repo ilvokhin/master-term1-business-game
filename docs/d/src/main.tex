@@ -1,0 +1,131 @@
+\documentclass[14pt, a4paper]{extreport}
+
+% increase toc depth up to subsubsection
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+\usepackage{tabu}
+\usepackage{color}
+\usepackage{array}
+\usepackage{epstopdf}
+\usepackage[russian]{babel}
+\usepackage[utf8x, utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.misc, shapes.geometric, arrows, shapes.multipart, shapes.arrows}
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+\usepackage{amsmath}
+\usepackage{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{xcolor, colortbl}
+\usepackage{mdframed}
+\usepackage{textcase}
+\usepackage[T2A,T1]{fontenc}
+% 
+\usepackage{indentfirst}
+% setup  page fields
+\usepackage{geometry}
+\geometry{left=25mm}
+\geometry{right=20mm}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+% set line interval
+\usepackage{setspace}
+\onehalfspacing
+% set footnotesize to 12 pt (for normalsize equal to 14 pt)
+\renewcommand{\footnotesize}{\small}
+
+\usepackage{titlesec}
+\titleformat{\chapter}{\filcenter\bfseries}{\thechapter.}{1em}{}
+\titleformat{\section}{\filcenter\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\filcenter\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\filcenter\bfseries}{\thesubsubsection}{1em}{}
+\titleformat{\paragraph}{\filcenter\bfseries}{\paragraph}{1em}{}
+\titlespacing*{\chapter}{0pt}{10pt}{10pt}
+
+% make page number in top right corner
+\usepackage{fancyhdr}
+% rename abstract
+\AtBeginDocument{\addto\captionsenglish{\def\abstractname{\MakeTextUppercase{Реферат}}}}
+% counters
+\usepackage[figure, table, page, enumiv]{totalcount}
+%
+\addto\captionsrussian
+{
+  \renewcommand{\contentsname}
+    {\hfill{\normalsize\MakeTextUppercase{Содержание}}\hfill}
+}
+%
+\addto\captionsrussian
+{
+  \renewcommand{\bibname}{\hfill\normalsize\MakeTextUppercase{Список использованных источников}\hfill}
+}
+
+\usepackage{tocloft}
+% add dots for chapters
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand\cftchapfont{\mdseries}
+\renewcommand\cftchappagefont{\mdseries}
+% add dot after chapter number
+\renewcommand{\cftchapaftersnum}{.}
+%
+\usepackage{caption}
+\captionsetup[figure]{labelsep=space}
+\captionsetup[table]{labelsep=space}
+
+%
+% flow chart commands
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=0.5cm, text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=0.5cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, aspect=2, minimum width=1mm, minimum height=1mm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+%
+
+% declare new operator for correct \limits usage
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\title{Разработка проектного офиса <<Цифромед>>}
+\date{}
+
+\begin{document}
+\RestyleAlgo{boxruled}
+% style for top right corner page number
+\fancypagestyle{plain}{%
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\thepage} % except the right top corner
+    \renewcommand{\headrulewidth}{0pt} % remove line between header and main text
+}
+\pagestyle{plain}
+
+\renewcommand\abstractname{\MakeTextUppercase{Реферат}}
+
+\newpage
+\vspace*{-25mm}
+\tableofcontents
+\newpage
+
+% Examples:
+%\addcontentsline{toc}{section}{Заголовок}
+%\section*{Заголовок}
+
+%\addcontentsline{toc}{section}{Введение}
+%\section{Введение}
+\addcontentsline{toc}{chapter}{\MakeTextUppercase{Введение}}
+\chapter*{\MakeTextUppercase{Введение}}
+TODO
+\newpage
+
+\addcontentsline{toc}{chapter}{\MakeTextUppercase{Заключение}}
+\chapter*{\MakeTextUppercase{Заключение}}
+TODO
+\newpage
+\clearpage
+
+%
+\addcontentsline{toc}{chapter}{\MakeTextUppercase{Список использованных источников}}
+\begin{thebibliography}{}
+\bibliographystyle{plain}
+\bibitem{wiki} some wikipage
+\end{thebibliography}
+
+\end{document}
