@@ -40,7 +40,7 @@ class Task(Document):
   text = StringProperty()
   tags = StringProperty()
   status = StringProperty()
-  project_id = StringProperty()
+  project = StringProperty()
   comments = SetProperty()
   create_date = DateTimeProperty()
   update_date = DateTimeProperty()

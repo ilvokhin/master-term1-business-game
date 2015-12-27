@@ -52,9 +52,8 @@ def edit(id):
   form.project.choices = zip(possible_project, possible_project)
   # dirty hack here: we use referrer to determine from which
   # project we came from and set correct value to select field
-  print request.referrer
   if PROJECT_ROUTE in request.referrer:
-    project_id = request.referrer.split('/')[-1]
+    project = request.referrer.split('/')[-1]
     project = Project.get(project_id)
     form.project.default = project.title
     form.process()
