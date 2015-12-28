@@ -1,34 +1,113 @@
-\documentclass[a4paper, 14pt]{extarticle}
-\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
-\usepackage[utf8]{inputenc}
-\usepackage[english, russian]{babel}
-\usepackage{amssymb, latexsym, amsmath}
-\usepackage{indentfirst}
-\usepackage{graphicx}
-\usepackage{citehack}
-\usepackage{tabularx}
-\usepackage{listings}
-\usepackage{pdfpages}
+\documentclass[14pt, a4paper]{extreport}
 
-\lstloadlanguages{HTML,python}
-\lstset{extendedchars=false,
-  breaklines=true,
-  breakatwhitespace=true,
-  keepspaces = true,
-  tabsize=2
+% increase toc depth up to subsubsection
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+\usepackage{tabu}
+\usepackage{color}
+\usepackage{array}
+\usepackage{epstopdf}
+\usepackage[russian]{babel}
+\usepackage[utf8x, utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.misc, shapes.geometric, arrows, shapes.multipart, shapes.arrows}
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+\usepackage{amsmath}
+\usepackage{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{xcolor, colortbl}
+\usepackage{mdframed}
+\usepackage{textcase}
+\usepackage{tabularx}
+\usepackage[T2A,T1]{fontenc}
+% 
+\usepackage{indentfirst}
+% setup  page fields
+\usepackage{geometry}
+\geometry{left=25mm}
+\geometry{right=20mm}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+% set line interval
+\usepackage{setspace}
+\onehalfspacing
+% set footnotesize to 12 pt (for normalsize equal to 14 pt)
+\renewcommand{\footnotesize}{\small}
+
+\usepackage{titlesec}
+\titleformat{\chapter}{\filcenter\bfseries}{\thechapter.}{1em}{}
+\titleformat{\section}{\filcenter\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\filcenter\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\filcenter\bfseries}{\thesubsubsection}{1em}{}
+\titleformat{\paragraph}{\filcenter\bfseries}{\paragraph}{1em}{}
+\titlespacing*{\chapter}{0pt}{10pt}{10pt}
+
+% make page number in top right corner
+\usepackage{fancyhdr}
+% rename abstract
+\AtBeginDocument{\addto\captionsenglish{\def\abstractname{\MakeTextUppercase{Реферат}}}}
+% counters
+\usepackage[figure, table, page, enumiv]{totalcount}
+%
+\addto\captionsrussian
+{
+  \renewcommand{\contentsname}
+    {\hfill{\normalsize\MakeTextUppercase{Содержание}}\hfill}
+}
+%
+\addto\captionsrussian
+{
+  \renewcommand{\bibname}{\hfill\normalsize\MakeTextUppercase{Список использованных источников}\hfill}
 }
 
+\usepackage{tocloft}
+% add dots for chapters
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand\cftchapfont{\mdseries}
+\renewcommand\cftchappagefont{\mdseries}
+% add dot after chapter number
+\renewcommand{\cftchapaftersnum}{.}
+%
+\usepackage{caption}
+\captionsetup[figure]{labelsep=space}
+\captionsetup[table]{labelsep=space}
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+
+%
+% flow chart commands
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=0.5cm, text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=0.5cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, aspect=2, minimum width=1mm, minimum height=1mm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+%
+
+% declare new operator for correct \limits usage
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 \begin{document}
+\RestyleAlgo{boxruled}
+% style for top right corner page number
+\fancypagestyle{plain}{%
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\thepage} % except the right top corner
+    \renewcommand{\headrulewidth}{0pt} % remove line between header and main text
+}
+\pagestyle{plain}
 \include{./title}
+
 \newpage
-
-
+\vspace*{-25mm}
 \tableofcontents
 \newpage
 
 
-\section{Введение}
+\chapter{\MakeTextUppercase{Введение}}
 Планирование -- один из ключевых видов деятельности, необходимых для успешного менеджмента и реализации любого проекта, когда речь заходит о бизнесе. Целью данной работы являлось создание веб-сервиса, оформленного в виде SaaS-решения и представляющего собой проектный офис для совместной работы проектных команд.
 
 В работе представлен процесс проектирования архитектуры и анализа бизнес-логики реализуемого приложения; кроме того, приведено краткое описание проектирования интерфейса (клиентской части). Всё это входило в мою часть работы, определённую через Work Breakdown Structure при планировании проекта.
@@ -43,8 +122,8 @@
 
 \newpage
 
-\section{Проектирование приложения}
-\subsection{Схема БД}
+\chapter{\MakeTextUppercase{Проектирование приложения}}
+\section{\MakeTextUppercase{Схема БД}}
 
 \begin{figure}[!htb]
   \centering
@@ -59,7 +138,7 @@
 
 Несмотря на произошедший позднее отказ от реляционных баз данных и переход к БД, основанных на технологии NoSQL, когда вся база представлена коллекцией документов различных типов без разбиения их на таблицы, спроектированная схема легла в основу финальной версии приложения.
 
-\subsection{Анализ места размещения бизнес-логики}
+\section{\MakeTextUppercase{Анализ места размещения бизнес-логики}}
 \begin{figure}[!htb]
   \centering
     \includegraphics[scale=0.6]{../shared_images/business-logic/client.jpg}
@@ -139,8 +218,9 @@
 
 Перемещая вычисления в среднее звено, команда разработчиков отходит от границ слоя данных, что является несомненным плюсом: в то время как бизнес-звено имеет возможности масштабирования (можно закупить дополнительные сервера для обработки данных), попытка аналогичным образом увеличить количество серверов для хранения данных выльется в проблемы с дублированием, резервным копированием и -- возможно -- миграцией данных, что повлечёт замедление свежерасширенного слоя БД.
 
-\section{Проектирование клиентской части}
-\subsection{Главная страница}
+
+\chapter{\MakeTextUppercase{Проектирование клиентской части}}
+\section{\MakeTextUppercase{Главная страница}}
 Первоначально на главной странице предполагалось выводить последние 10 созданных проектов, чтобы <<прорекламировать>> их остальным участникам и информационно насытить страницу, но поздней было принято решение не показывать ничего, кроме приглашения к логину. Сделано это было по причине того, что список проектов -- без возможности просмотра их незарегистрированным пользователем -- сам по себе не имеет никакого смысла; в результате при просмотре главной страницы незалогиненному пользователю предлагается залогиниться или зарегистрироваться.
 
 \begin{figure}[!htb]
@@ -165,7 +245,7 @@
     \label{fig:start}
 \end{figure}
 
-\subsection{Создание проектов и задач}
+\section{\MakeTextUppercase{Создание проектов и задач}}
 Было решено воспользоваться успешно зарекомендовавшим себя интерфейсом вида <<Заголовок -- поле для заполнения>>. Отдельно стоит упомянуть, что через процедуру создания или редактирования к задаче можно добавить до трёх файлов, связанных с ней.
 
 \begin{figure}[!htb]
@@ -182,9 +262,11 @@
     \label{fig:start}
 \end{figure}
 
-\subsection{Работа с файлами}
+\section{\MakeTextUppercase{Работа с файлами}}
 
-После информации о каждой задаче выводится список файлов, связанных с ней. По умолчанию файлы сохраняются по пути {\tt /uploads/TASK\_ID/FILENAME} и могут быть просмотрены любым человеком, имеющим ссылку. Тем не менее, ввиду сложности подбора ID (идентификационного номера) задачи, доступ извне к файлам затруднён. Данный принцип обеспечения безопасности называется security through obscurity, или <<безопасность через неясность>>. Его основная идея заключается в том, чтобы скрыть внутреннее устройство системы или реализацию для обеспечения безопасности.
+После информации о каждой задаче выводится список файлов, связанных с ней. По умолчанию файлы могут быть просмотрены любым человеком, имеющим ссылку. Тем не менее, ввиду сложности подбора ID (идентификационного номера) задачи, доступ извне к файлам затруднён. Данный принцип обеспечения безопасности называется security through obscurity, или <<безопасность через неясность>>. Его основная идея заключается в том, чтобы скрыть внутреннее устройство системы или реализацию для обеспечения безопасности. Несмотря на это, неосторожный пользователь или злоумышленник не сможет затереть ранее залитый файл, поскольку при конфликте имён к имени нового файла добавляется случайный набор из 8 цифр и латинских букв. Типичная ссылка на файл выглядит так: \\
+{\tt http://127.0.0.1:1337/uploads/df0c17989df6268ec08cbc07e9962406/ \\
+course-a1a70673.rar}
 
 \begin{figure}[!htb]
   \centering
@@ -193,11 +275,7 @@
     \label{fig:start}
 \end{figure}
 
-Стоит отметить, что неосторожный пользователь или злоумышленник не сможет затереть ранее залитый файл, поскольку при конфликте имён к имени нового файла добавляется случайный набор из 8 цифр и латинских букв. Типичная ссылка на файл в результате выглядит так: \\
-{\tt http://127.0.0.1:1337/uploads/df0c17989df6268ec08cbc07e9962406/ \\
-course-a1a70673.rar}
-
-\subsection{Система комментариев}
+\section{\MakeTextUppercase{Система комментариев}}
 
 Внизу каждой задачи имеется поле для оставления комментариев, а над ним -- список комментариев, отсортированный под дате добавления. Данная система позволяет осуществлять ведение дискуссий по теме задачи.
 
@@ -208,12 +286,12 @@ course-a1a70673.rar}
     \label{fig:start}
 \end{figure}
 
-\section{Заключение}
+\chapter{\MakeTextUppercase{Заключение}}
 В рамках проделанной работы была спроектирована схема базы данных, лёгшая впоследствии в основу архитектуры проекта. После детального анализа оптимального места размещения бизнес-логики для неё был выделен отдельный слой, что повлекло за собой отвязку проекта от реляционных БД и конкретных решений в принципе, добавляя приложению гибкости.
 
 Также был спроектирован интерфейс приложения, состоящий из четырёх основных (не считая тривиальных) компонент, обеспечивающий удобную навигацию и ориентировку в списке имеющихся задач и их приоритетов.
 
-\addcontentsline{toc}{section}{Список использованных источников}
+\addcontentsline{toc}{chapter}{\MakeTextUppercase{Список использованных источников}}
 \begin{thebibliography}{}
 \bibitem{} Википедия [Электронный ресурс]: \\https://ru.wikipedia.org/wiki/Бизнес-логика
 \bibitem{} Chad Z. Hower ``Dude, where's my business logic?'' [Электронный ресурс]: http://www.codeproject.com/Articles/10746/Dude-where-s-my-business-logic
