@@ -4,6 +4,7 @@
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
 
+\usepackage{pdfpages}
 \usepackage{tabu}
 \usepackage{color}
 \usepackage{array}
@@ -571,11 +572,13 @@ course-a1a70673.rar}
 
 Тем не менее, результат проекта является приемлемой альтернативой известным проектным офисам, о чём свидетельствует тестирование, проведённое командой Сухарева А. В рамках данного тестирования проект-менеджером была воссоздана структура задач проекта и проведено разделение ответственности, а также протестирована система комментариев. Процесс упомянутого тестирования использован в качестве иллюстраций к разделу <<Проектирование клиентской части>>.
 
-\newpage
-
 
 \chapter{\MakeTextUppercase{Паспорт проекта}}
-% Сырые PDF, экспортированные из MS Word; я не хочу перевёрстывать их в TeX
+\includepdf[pages=-,pagecommand=\thispagestyle{plain}]{./passport/project_info.pdf}
+\includepdf[pages=-,pagecommand=\thispagestyle{plain}]{./passport/contents.pdf}
+\includepdf[pages=-,pagecommand=\thispagestyle{plain},landscape]{./passport/team.pdf}
+\includepdf[pages=-,pagecommand=\thispagestyle{plain}]{./passport/details.pdf}
+
 \newpage
 
 
